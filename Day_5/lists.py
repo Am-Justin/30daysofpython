@@ -54,7 +54,7 @@ for age in ages:
     total+= int(age)
 average = total / len(ages)
 
-print(abs(mini - average) > abs(maxi - average))
+print(f"mini - average est plus grand que maxi - average ?s{abs(mini - average) > abs(maxi - average)}")
 
 
 countries = [
