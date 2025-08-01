@@ -264,6 +264,9 @@ for i in range(1, len(fruits)+1):
 
 print(fruits_reverse)
 
+
+# 3. Go to the data folder and use the countries_data.py file.
+# i. What are the total number of languages in the data
 from countries_data import countries_data
 all_lang = []
 
@@ -271,7 +274,29 @@ for country in countries_data:
     all_lang.extend(country["languages"])
 
 print(f"le nombre total de langue est de {len(set(all_lang))}")
-# 3. Go to the data folder and use the countries_data.py file.
-# i. What are the total number of languages in the data
+
 # ii. Find the ten most spoken languages from the data
+print("The ten most spoken languages from the data")
+lang_spoker = {}  # La langue et le nombre de pays dans lequel elle est parlé-
+for country in countries_data:
+    for lang in country["languages"]:
+        if lang in lang_spoker:
+            lang_spoker[lang] +=1
+        else:
+            lang_spoker[lang] = 1
+
+most_lang = sorted(lang_spoker.items(), key=lambda x:x[1], reverse=True)[:10]     
+
+for lang, freq in most_lang:
+    print(f"{lang} est parlé dans {freq}")
+
+print()
+
 # iii. Find the 10 most populated countries in the world
+print("The 10 most populated countries in the world")
+most_population = sorted(countries_data, key=lambda x:x["population"], reverse=True)[:10]
+i = 1
+for country_d in most_population:
+    print(f"{i}.) {country_d["name"]} avec une population de {country_d["population"]}")
+    i+=1
+
