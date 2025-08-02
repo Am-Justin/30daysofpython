@@ -2,7 +2,7 @@
 # Exercises: Level 1
 
 import math
-
+from countries_data import countries_data
 
 def add_two_numbers(num1, num2):
     total = num1 + num2
@@ -134,21 +134,64 @@ def is_prime(nbre):
         return False
 
 print(f"Is prime ? {is_prime(2)}")
-
+    
 def all_unique(liste):
     a = []
-    for elt in liste:
-        a.append(elt)
-        if elt in a:
+    for i in range(len(liste)):
+        if liste[i] in a:
             return False
-        else: 
-            return True
-        
+        a.append(liste[i])
+    return True
+      
 
-print(all_unique([1,3,5,4]))
+print("All unique ?",all_unique([1,3,5,4]))
+
 # 2. Write a functions which checks if all items are unique in the list.
+def same_type(liste):
+    a = 0
+    for i in range(len(liste)):
+        if type(liste[0]) == type(liste[i]):
+            a+=1
+    if a < len(liste):
+        return False
+    else :
+        return True
+print("Same type ?",same_type([1, 1, 6, "s"]))
 
-# Copyright © 2025 Skill Foundry
-# 3. Write a function which checks if all the items of the list are of the same data
-# type.
-# 4. Write a function which check if provided variable is a valid python variable
+# 5. Go to the data folder and access the countries-data.py file.
+#  Create a function called the most_spoken_languages in the world. It should
+# return 10 or 20 most spoken languages in the world in descending order
+#  Create a function called the most_populated_countries. It should return 10 or
+# 20 most populated countries in descending order.
+countries_data
+
+def most_lang(countries_data):
+    lang_spoker = {}  # La langue et le nombre de pays dans lequel elle est parlé-
+    twenty_lang = []
+    for country in countries_data:
+        for lang in country["languages"]:
+            if lang in lang_spoker:
+                lang_spoker[lang] +=1
+            else:
+                lang_spoker[lang] = 1
+
+    most_lang = sorted(lang_spoker.items(), key=lambda x:x[1], reverse=True)[:20]     
+
+    for lang, freq in most_lang:
+        # print(f"{lang} est parlé dans {freq}")
+        twenty_lang.append(lang)
+
+    return twenty_lang
+
+print("Ten languanges mos spoken :",most_lang(countries_data))
+
+
+def most_populated(countries_data):
+    most_population = sorted(countries_data, key=lambda x:x["population"], reverse=True)[:20]
+    most_pop_country = []
+    for country_d in most_population:
+        most_pop_country.append(country_d["name"])
+       
+    return most_pop_country
+
+print("Twenty most populated countries :",most_populated(countries_data))
